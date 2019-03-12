@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PriceEngine
 {
@@ -35,15 +36,8 @@ namespace PriceEngine
         public bool CheckRule(Rule r, Context context)
         {
             var conditionsContainerChecker = new ConditionsContainerChecker();
-            switch (r.Condition.Type)
-            {
-                case ConditionContainerType.All:
-                    return conditionsContainerChecker.Check(r.Condition, context.Products);
-                case ConditionContainerType.Any:
-                    return false;
-                default:
-                    return false;
-            }
+
+            return conditionsContainerChecker.Check(r.Condition, context.Products);
         }
     }
 
@@ -51,56 +45,74 @@ namespace PriceEngine
     {
         public bool Check(ConditionsContainer conditionContainer, List<Product> products)
         {
-            var productsWhereAllConditionsApply = products.Where(p => conditionContainer.Conditions.)
-            return conditionContainer.Conditions.All(c =>
+            var productsWhereConditionsAreMet = new List<Product>();
+            products.ForEach(p =>
             {
-                if (c.Operator == "Equals")
+                bool conditionsMet = CheckContainer(conditionContainer, p);
+
+                if (conditionsMet)
+                    productsWhereConditionsAreMet.Add(p);
+            });          
+
+            return productsWhereConditionsAreMet.Any();
+        }
+
+        private static bool CheckContainer(ConditionsContainer container, Product p)
+        {
+            // Check conditions in current container
+            bool conditionsMet = false;
+            if(container.Type == ConditionContainerType.All)
+            {
+                conditionsMet = container.Conditions.All(c => ConditionMet(c, p));
+
+                if (!conditionsMet)
+                    return false;
+            }
+            else
+            {
+                conditionsMet = container.Conditions.Any(c => ConditionMet(c, p));
+
+                if (conditionsMet)
+                    return true;
+            }
+
+            
+            // Check conditions in nested containers recursivley
+            if (container.ConditionContainers != null && container.ConditionContainers.Any())
+            {
+                foreach (var cc in container.ConditionContainers)
                 {
-                    var pl = products.Where(p => p.Attributes.GetValueOrDefault(c.ContextPropertyName) == c.Value);
-                    if (!pl.Any())
-                        return false;
+                    conditionsMet = CheckContainer(cc, p);
+
+                    if(cc.Type == ConditionContainerType.All)
+                    {
+                        if (!conditionsMet)
+                            return false;
+                    }
+                    else
+                    {
+                        if (conditionsMet)
+                            return true;
+                    }
                 }
+            }
 
-                if (c.Operator == "GratherThanOrEqualTo")
-                {
-                    var pl = products.Where(p => p.Attributes.GetValueOrDefault(c.ContextPropertyName) >= c.Value);
-                    if (!pl.Any())
-                        return false;
-                }
+            return true;
+        }
 
-                return true;
-            });
+        private static bool ConditionMet(Condition condition, Product p)
+        {
+            if (condition.Operator == "Equals")
+            {
+                return p.Attributes.GetValueOrDefault(condition.ContextPropertyName) == condition.Value;
+            }
 
-            //foreach(var c in conditionContainer.Conditions)
-            //{
-            //    foreach (var p in products)
-            //    {
-            //        if (c.Operator == "Equals")
-            //        {
-            //            var meetsCondition = v.Equals(c.Value);
-            //            if (!meetsCondition)
-            //                return false;
-            //        }
+            if (condition.Operator == "GratherThanOrEqualTo")
+            {
+                return p.Attributes.GetValueOrDefault(condition.ContextPropertyName) >= condition.Value;
+            }
 
-            //        if (c.Operator == "GratherThanOrEqualTo")
-            //        {
-            //            var meetsCondition = v >= c.Value;
-            //            if (!meetsCondition)
-            //                return false;
-            //        }
-            //    }
-            //}
-
-            // I got all the way here so rule applies
-            // return true;
-            // any nested stuff?
-            //if (allOrAny.AllOrAny.Any())
-            //{
-            //    foreach (var aoe in allOrAny.AllOrAny)
-            //    {
-            //        var passes = Check(aoe, context);
-            //    }
-            //}
+            return false;
         }
     }
 }

@@ -50,8 +50,122 @@ namespace PriceEngine
                                 ContextPropertyName = "Price",
                                 Operator = "GratherThanOrEqualTo",
                                 Value = 100M
+                            }                     
+                        },
+                        ConditionContainers = new List<ConditionsContainer>
+                        {
+                            new ConditionsContainer
+                            {
+                                Type = ConditionContainerType.All,
+                                Conditions = new List<Condition>
+                                {
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Color",
+                                        Operator = "Equals",
+                                        Value = "Red"
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    }
+                                }
+                            },
+                            new ConditionsContainer
+                            {
+                                Type = ConditionContainerType.All,
+                                Conditions = new List<Condition>
+                                {
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Color",
+                                        Operator = "Equals",
+                                        Value = "Red"
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    }
+                                }
+                            },
+                            new ConditionsContainer
+                            {
+                                Type = ConditionContainerType.Any,
+                                Conditions = new List<Condition>
+                                {
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Color",
+                                        Operator = "Equals",
+                                        Value = "Blue"
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    },
+                                    new Condition
+                                    {
+                                        ContextPropertyName = "Price",
+                                        Operator = "GratherThanOrEqualTo",
+                                        Value = 100M
+                                    }
+                                }
                             }
-                        }
+                        },
                     },
                 };
 
