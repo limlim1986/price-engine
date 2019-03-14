@@ -21,7 +21,7 @@ namespace PriceEngine
                         { "ProductId", i },
                         { "Name", "iPhone 7" },
                         { "Price", random.Next(100, 15000) },
-                        { "Color", "Red" },
+                        { "Color", "Blue" },
                         { "Memory", 32 },
                         { "HasEsim", true }
                     }

@@ -18,7 +18,7 @@ namespace PriceEngine
             var ruleRepository = new RuleRepository();
             var context = new Context
             {
-                Products = productRepository.GetAll(),
+                Products = productRepository.GetAll().ToArray(),
                 Customer = new Customer { Age = 100, Name = "Liam" }
             };
             var rules = ruleRepository.GetAll();
