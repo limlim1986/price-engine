@@ -11,6 +11,6 @@ namespace PriceEngine
         public List<int> ShopIds { get; set; }
         public bool ContinueProcessing { get; set; }
         public ConditionsContainer Condition { get; set; }
-        public Action Action { get; set; }
+        public ActionType Action { get; set; }
     }
 }

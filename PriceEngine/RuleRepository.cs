@@ -10,12 +10,13 @@ namespace PriceEngine
         {
             _rules = new List<Rule>();
 
-            for(int i = 1; i < 1000; i++)
+            for(int i = 1; i < 100; i++)
             {
                 var r = new Rule
                 {
                     RuleId = i,
                     Name = "10% off for all products that cost 10",
+                    Action = ActionType.DiscountPercentage,
                     Condition = new ConditionsContainer
                     {
                         Type = ConditionContainerType.All,
@@ -130,14 +131,14 @@ namespace PriceEngine
                             },
                             new ConditionsContainer
                             {
-                                Type = ConditionContainerType.Any,
+                                Type = ConditionContainerType.All,
                                 Conditions = new List<Condition>
                                 {
                                     new Condition
                                     {
                                         ContextPropertyName = "Color",
                                         Operator = "Equals",
-                                        Value = "Blue"
+                                        Value = "Red"
                                     },
                                     new Condition
                                     {

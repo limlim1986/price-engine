@@ -16,48 +16,61 @@ namespace PriceEngine
             this.context = context;
         }
 
-        public void ApplyRules()
+        public Product[] ApplyRules()
         {
             var ruleEvaluator = new RuleEvaluator();
-            var rulesThatApply = new List<Rule>();
+            var poductsWithAppliedRules = new Product[context.Products.Length];
 
-            for (int i = 0; i < rules.Count; i++)
+            for (int i = 0; i < context.Products.Length; i++)
             {
-                Rule rule = rules[i];
-                bool applies = ruleEvaluator.CheckRule(rule, context);
-
-                if (applies)
-                    rulesThatApply.Add(rule);
+                poductsWithAppliedRules[i] = ruleEvaluator.ApplyRules(rules, context.Products[i]); ;
             }
+
+            return poductsWithAppliedRules;
         }
     }
 
     public class RuleEvaluator
     {
-        
-        public bool CheckRule(Rule r, Context context)
-        {
-            var conditionsContainerChecker = new ConditionsContainerChecker();
+        private ConditionsContainerChecker _conditionsContainerChecker;
 
-            return conditionsContainerChecker.Check(r.Condition, context.Products);
+        public RuleEvaluator()
+        {
+            _conditionsContainerChecker = new ConditionsContainerChecker();
+        }
+        public Product ApplyRules(List<Rule> rules, Product product)
+        {
+            foreach(var rule in rules)
+            {
+                var ruleApplies = _conditionsContainerChecker.Check(rule, product);
+
+                if (ruleApplies)
+                {
+                    switch (rule.Action)
+                    {
+                        case ActionType.DiscountPercentage:
+                            var discount = decimal.Multiply(product.Attributes["Price"], 0.1M);
+                            product.Attributes["Price"] -= discount;
+                            break;
+                        case ActionType.DiscountFixedAmount:
+                            break;
+                        case ActionType.SetFixedPrice:
+                            break;
+                    }
+
+                    product.RulesApplied.Add(rule.RuleId);
+                }
+            }
+
+            return product;
         }
     }
 
     public class ConditionsContainerChecker
     {
-        public bool Check(ConditionsContainer conditionContainer, Product[] products)
+        public bool Check(Rule rule, Product product)
         {
-            var productsWhereConditionsAreMet = new List<Product>();
-            for(var i = 0; i < products.Length; i++)
-            {
-                var p = products[i];
-                bool conditionsMet = CheckContainer(conditionContainer, p);
-
-                if (conditionsMet)
-                    productsWhereConditionsAreMet.Add(p);
-            }      
-
-            return productsWhereConditionsAreMet.Any();
+            return CheckContainer(rule.Condition, product);
         }
 
         private static bool CheckContainer(ConditionsContainer container, Product p)

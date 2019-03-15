@@ -1,7 +1,9 @@
 ﻿namespace PriceEngine
 {
-    public class Action
+    public enum ActionType
     {
-
+        DiscountPercentage,
+        DiscountFixedAmount,
+        SetFixedPrice
     }
 }

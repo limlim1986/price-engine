@@ -25,7 +25,7 @@ namespace PriceEngine
 
             var re = new RuleExecuter(rules, context);
 
-            re.ApplyRules();
+            var pwar = re.ApplyRules();
 
             sw.Stop();
             Console.WriteLine($"Executed in {sw.ElapsedMilliseconds}ms");

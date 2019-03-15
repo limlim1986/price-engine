@@ -12,7 +12,7 @@ namespace PriceEngine
         {
             _products = new List<Product>();
             var random = new Random();
-            for (int i = 1; i < 5000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var p = new Product
                 {
@@ -21,7 +21,7 @@ namespace PriceEngine
                         { "ProductId", i },
                         { "Name", "iPhone 7" },
                         { "Price", random.Next(100, 15000) },
-                        { "Color", "Blue" },
+                        { "Color", "Red" },
                         { "Memory", 32 },
                         { "HasEsim", true }
                     }
