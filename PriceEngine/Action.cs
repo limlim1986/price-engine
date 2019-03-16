@@ -1,9 +1,12 @@
-﻿namespace PriceEngine
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace PriceEngine
 {
-    public enum ActionType
+    public class Action
     {
-        DiscountPercentage,
-        DiscountFixedAmount,
-        SetFixedPrice
+        public ActionType Type { get; set; }
+        public int Value { get; set; }
     }
 }

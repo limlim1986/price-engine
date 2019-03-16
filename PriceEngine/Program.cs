@@ -6,14 +6,10 @@ namespace PriceEngine
 {
     class Program
     {
-        static void Main(string[] args)
-        {         
-            RunRules();           
-        }
+        private static RuleExecuter _re;
 
-        private static void RunRules()
+        static void Main(string[] args)
         {
-            var sw = Stopwatch.StartNew();
             var productRepository = new ProductRepository();
             var ruleRepository = new RuleRepository();
             var context = new Context
@@ -22,11 +18,15 @@ namespace PriceEngine
                 Customer = new Customer { Age = 100, Name = "Liam" }
             };
             var rules = ruleRepository.GetAll();
+            _re = new RuleExecuter(rules, context);
 
-            var re = new RuleExecuter(rules, context);
+            RunRules();           
+        }
 
-            var pwar = re.ApplyRules();
-
+        private static void RunRules()
+        {
+            var sw = Stopwatch.StartNew();                    
+            var pwar = _re.ApplyRules();
             sw.Stop();
             Console.WriteLine($"Executed in {sw.ElapsedMilliseconds}ms");
 

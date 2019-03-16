@@ -12,7 +12,7 @@ namespace PriceEngine
 
         public RuleExecuter(List<Rule> rules, Context context)
         {
-            this.rules = rules;
+            this.rules = rules.OrderBy(r => r.Priority).ToList();
             this.context = context;
         }
 
@@ -46,19 +46,11 @@ namespace PriceEngine
 
                 if (ruleApplies)
                 {
-                    switch (rule.Action)
-                    {
-                        case ActionType.DiscountPercentage:
-                            var discount = decimal.Multiply(product.Attributes["Price"], 0.1M);
-                            product.Attributes["Price"] -= discount;
-                            break;
-                        case ActionType.DiscountFixedAmount:
-                            break;
-                        case ActionType.SetFixedPrice:
-                            break;
-                    }
-
+                    product.ExecuteAction(rule.Action);                 
                     product.RulesApplied.Add(rule.RuleId);
+
+                    if (!rule.ContinueProcessing)
+                        break;
                 }
             }
 
