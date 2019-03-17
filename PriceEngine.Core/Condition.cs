@@ -20,6 +20,6 @@ namespace PriceEngine
     {
         public string Operator { get; set; }
         public dynamic Value { get; set; }
-        public string ContextPropertyName { get; internal set; }
+        public string ContextPropertyName { get; set; }
     }
 }

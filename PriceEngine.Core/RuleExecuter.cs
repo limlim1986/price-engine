@@ -7,47 +7,49 @@ namespace PriceEngine
 {
     public class RuleExecuter
     {
-        private readonly List<Rule> rules;
-        private readonly Context context;
-
-        public RuleExecuter(List<Rule> rules, Context context)
-        {
-            this.rules = rules.OrderBy(r => r.Priority).ToList();
-            this.context = context;
-        }
-
-        public Product[] ApplyRules()
-        {
+        public Product[] ApplyRules(Rule[] rules, Product[] products)
+        {       
+            rules = rules.OrderBy(r => r.Priority).ToArray();
             var ruleEvaluator = new RuleEvaluator();
-            var poductsWithAppliedRules = new Product[context.Products.Length];
 
-            for (int i = 0; i < context.Products.Length; i++)
+            for (int i = 0; i < products.Length; i++)
             {
-                poductsWithAppliedRules[i] = ruleEvaluator.ApplyRules(rules, context.Products[i]); ;
+                products[i] = ruleEvaluator.ApplyRules(rules, products[i]);
             }
 
-            return poductsWithAppliedRules;
+            return products;
         }
     }
 
     public class RuleEvaluator
     {
+        private ActionExecutor _actionExecutor;
         private ConditionsContainerChecker _conditionsContainerChecker;
 
         public RuleEvaluator()
         {
+            _actionExecutor = new ActionExecutor();
             _conditionsContainerChecker = new ConditionsContainerChecker();
         }
-        public Product ApplyRules(List<Rule> rules, Product product)
+        public Product ApplyRules(Rule[] rules, Product product)
         {
-            foreach(var rule in rules)
+            for (int i = 0; i < rules.Length; i++)
             {
+                Rule rule = rules[i];
                 var ruleApplies = _conditionsContainerChecker.Check(rule, product);
 
                 if (ruleApplies)
                 {
-                    product.ExecuteAction(rule.Action);                 
-                    product.RulesApplied.Add(rule.RuleId);
+                    var ar = new AppliedRule
+                    {
+                        Rule = rule,
+                        PriceBeforeRuleWasApplied = product.Attributes["Price"],
+                    };
+
+                    product = _actionExecutor.ExecuteAction(product, rule.Action);
+                    ar.PriceAfterRuleWasApplied = product.Attributes["Price"];
+
+                    product.RulesApplied.Add(ar);
 
                     if (!rule.ContinueProcessing)
                         break;

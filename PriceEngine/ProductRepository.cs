@@ -12,7 +12,7 @@ namespace PriceEngine
         {
             _products = new List<Product>();
             var random = new Random();
-            for (int i = 0; i < 5000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var p = new Product
                 {

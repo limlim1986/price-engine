@@ -6,6 +6,8 @@ namespace PriceEngine
 {
     class Program
     {
+        private static Product[] products;
+        private static Rule[] rules;
         private static RuleExecuter _re;
 
         static void Main(string[] args)
@@ -14,11 +16,12 @@ namespace PriceEngine
             var ruleRepository = new RuleRepository();
             var context = new Context
             {
-                Products = productRepository.GetAll().ToArray(),
                 Customer = new Customer { Age = 100, Name = "Liam" }
             };
-            var rules = ruleRepository.GetAll();
-            _re = new RuleExecuter(rules, context);
+
+            products = productRepository.GetAll().ToArray();
+            rules = ruleRepository.GetAll().ToArray();
+            _re = new RuleExecuter();
 
             RunRules();           
         }
@@ -26,8 +29,9 @@ namespace PriceEngine
         private static void RunRules()
         {
             var sw = Stopwatch.StartNew();                    
-            var pwar = _re.ApplyRules();
+            var pwar = _re.ApplyRules(rules, products);
             sw.Stop();
+
             Console.WriteLine($"Executed in {sw.ElapsedMilliseconds}ms");
 
             var k = Console.ReadKey();

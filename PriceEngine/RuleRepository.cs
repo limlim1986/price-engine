@@ -12,7 +12,7 @@ namespace PriceEngine
             _rules = new List<Rule>();
             var random = new Random();
 
-            for (int i = 1; i < 1000; i++)
+            for (int i = 1; i < 100; i++)
             {
                 var prio = random.Next(1, 100);
 
@@ -38,25 +38,25 @@ namespace PriceEngine
                             {
                                 ContextPropertyName = "Price",
                                 Operator = "GratherThanOrEqualTo",
-                                Value = 100M
+                                Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
                                 Operator = "GratherThanOrEqualTo",
-                                Value = 100M
+                                Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
                                 Operator = "GratherThanOrEqualTo",
-                                Value = 100M
+                                Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
                                 Operator = "GratherThanOrEqualTo",
-                                Value = 100M
+                                Value = 1M
                             }                     
                         },
                         ConditionContainers = new List<ConditionsContainer>
@@ -76,25 +76,25 @@ namespace PriceEngine
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     }
                                 }
                             },
@@ -113,25 +113,25 @@ namespace PriceEngine
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     }
                                 }
                             },
@@ -150,25 +150,25 @@ namespace PriceEngine
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
                                         Operator = "GratherThanOrEqualTo",
-                                        Value = 100M
+                                        Value = 1M
                                     }
                                 }
                             }

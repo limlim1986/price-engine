@@ -5,7 +5,6 @@ namespace PriceEngine
     public class Context
     {
         public List<int> CustomerSegmentIds { get; set; }
-        public Product[] Products { get; set; }
         public int ShopId { get; set; }
         public Customer Customer { get; set; }
     }

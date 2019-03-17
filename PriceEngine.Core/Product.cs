@@ -7,10 +7,10 @@ namespace PriceEngine
     {
         public Product()
         {
-            RulesApplied = new List<int>();
+            RulesApplied = new List<AppliedRule>();
         }
-
+        
         public Dictionary<string, dynamic> Attributes { get; set; }
-        public List<int> RulesApplied { get; set; }
+        public List<AppliedRule> RulesApplied { get; set; }
     }
 }
