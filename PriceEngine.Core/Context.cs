@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PriceEngine
+namespace PriceEngine.Core
 {
     public class Context
     {

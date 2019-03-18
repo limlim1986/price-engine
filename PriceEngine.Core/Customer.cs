@@ -1,4 +1,4 @@
-﻿namespace PriceEngine
+﻿namespace PriceEngine.Core
 {
     public class Customer
     {

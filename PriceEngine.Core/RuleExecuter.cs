@@ -1,9 +1,10 @@
-﻿using System;
+﻿using PriceEngine.Core.Operators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PriceEngine
+namespace PriceEngine.Core
 {
     public class RuleExecuter
     {
@@ -62,20 +63,26 @@ namespace PriceEngine
 
     public class ConditionsContainerChecker
     {
+        private readonly ConditionChecker _conditionChecker;
+
+        public ConditionsContainerChecker()
+        {
+            _conditionChecker = new ConditionChecker();
+        }
+
         public bool Check(Rule rule, Product product)
         {
             return CheckContainer(rule.Condition, product);
         }
 
-        private static bool CheckContainer(ConditionsContainer container, Product p)
+        private bool CheckContainer(ConditionsContainer container, Product p)
         {
-            // Check conditions in current container
             bool conditionsMet = false;
             if(container.Type == ConditionContainerType.All)
             {
                 for(int i = 0; i < container.Conditions.Count; i++)
                 {
-                    bool cm = ConditionMet(container.Conditions[i], p);
+                    bool cm = _conditionChecker.Check(container.Conditions[i], p);
                     if (!cm)
                         return false;
                 }
@@ -84,7 +91,7 @@ namespace PriceEngine
             {
                 for (int i = 0; i < container.Conditions.Count; i++)
                 {
-                    bool cm = ConditionMet(container.Conditions[i], p);
+                    bool cm = _conditionChecker.Check(container.Conditions[i], p);
                     if (cm)
                         return true;
                 }
@@ -113,21 +120,6 @@ namespace PriceEngine
             }
 
             return true;
-        }
-
-        private static bool ConditionMet(Condition condition, Product p)
-        {
-            if (condition.Operator == "Equals")
-            {
-                return p.Attributes.GetValueOrDefault(condition.ContextPropertyName) == condition.Value;
-            }
-
-            if (condition.Operator == "GratherThanOrEqualTo")
-            {
-                return p.Attributes.GetValueOrDefault(condition.ContextPropertyName) >= condition.Value;
-            }
-
-            return false;
         }
     }
 }

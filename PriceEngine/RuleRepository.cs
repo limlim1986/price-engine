@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PriceEngine.Core.Operators;
+using System;
 using System.Collections.Generic;
 
 namespace PriceEngine
@@ -31,31 +32,31 @@ namespace PriceEngine
                             new Condition
                             {
                                 ContextPropertyName = "Color",
-                                Operator = "Equals",
+                                Operator = OperatorConstant.Equals,
                                 Value = "Red"
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = "GratherThanOrEqualTo",
+                                Operator = OperatorConstant.GratherThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = "GratherThanOrEqualTo",
+                                Operator = OperatorConstant.GratherThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = "GratherThanOrEqualTo",
+                                Operator = OperatorConstant.GratherThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = "GratherThanOrEqualTo",
+                                Operator = OperatorConstant.GratherThan,
                                 Value = 1M
                             }                     
                         },
@@ -69,109 +70,35 @@ namespace PriceEngine
                                     new Condition
                                     {
                                         ContextPropertyName = "Color",
-                                        Operator = "Equals",
+                                        Operator = OperatorConstant.Equals,
                                         Value = "Red"
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
+                                        Operator = OperatorConstant.GratherThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
+                                        Operator = OperatorConstant.GratherThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
+                                        Operator = OperatorConstant.GratherThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
+                                        Operator = OperatorConstant.GratherThan,
                                         Value = 1M
                                     }
                                 }
                             },
-                            new ConditionsContainer
-                            {
-                                Type = ConditionContainerType.All,
-                                Conditions = new List<Condition>
-                                {
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Color",
-                                        Operator = "Equals",
-                                        Value = "Red"
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    }
-                                }
-                            },
-                            new ConditionsContainer
-                            {
-                                Type = ConditionContainerType.All,
-                                Conditions = new List<Condition>
-                                {
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Color",
-                                        Operator = "Equals",
-                                        Value = "Red"
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    },
-                                    new Condition
-                                    {
-                                        ContextPropertyName = "Price",
-                                        Operator = "GratherThanOrEqualTo",
-                                        Value = 1M
-                                    }
-                                }
-                            }
                         },
                     },
                 };

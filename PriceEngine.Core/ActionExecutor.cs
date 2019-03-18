@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PriceEngine
+namespace PriceEngine.Core
 {
     public class ActionExecutor
     {

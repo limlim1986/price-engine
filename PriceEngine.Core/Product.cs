@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PriceEngine
+namespace PriceEngine.Core
 {
     public class Product
     {

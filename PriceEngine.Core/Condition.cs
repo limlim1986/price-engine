@@ -1,24 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using PriceEngine.Core;
+using PriceEngine.Core.Operators;
 
-namespace PriceEngine
+namespace PriceEngine.Core
 {
-    public class ConditionsContainer
-    {
-        public ConditionContainerType Type { get; set; }
-        public List<Condition> Conditions { get; set; }
-        public List<ConditionsContainer> ConditionContainers { get; set; }
-    }
-
-
-    public enum ConditionContainerType
-    {
-        All,
-        Any
-    }
-
     public class Condition
     {
-        public string Operator { get; set; }
+        public OperatorConstant Operator { get; set; }
         public dynamic Value { get; set; }
         public string ContextPropertyName { get; set; }
     }
