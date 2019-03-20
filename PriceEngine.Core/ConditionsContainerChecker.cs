@@ -1,66 +1,8 @@
-﻿using PriceEngine.Core.Operators;
-using System;
-using System.Collections.Generic;
+﻿using PriceEngine.Core.Entities;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PriceEngine.Core
 {
-    public class RuleExecuter
-    {
-        public Product[] ApplyRules(Rule[] rules, Product[] products)
-        {       
-            rules = rules.OrderBy(r => r.Priority).ToArray();
-            var ruleEvaluator = new RuleEvaluator();
-
-            for (int i = 0; i < products.Length; i++)
-            {
-                products[i] = ruleEvaluator.ApplyRules(rules, products[i]);
-            }
-
-            return products;
-        }
-    }
-
-    public class RuleEvaluator
-    {
-        private ActionExecutor _actionExecutor;
-        private ConditionsContainerChecker _conditionsContainerChecker;
-
-        public RuleEvaluator()
-        {
-            _actionExecutor = new ActionExecutor();
-            _conditionsContainerChecker = new ConditionsContainerChecker();
-        }
-        public Product ApplyRules(Rule[] rules, Product product)
-        {
-            for (int i = 0; i < rules.Length; i++)
-            {
-                Rule rule = rules[i];
-                var ruleApplies = _conditionsContainerChecker.Check(rule, product);
-
-                if (ruleApplies)
-                {
-                    var ar = new AppliedRule
-                    {
-                        Rule = rule,
-                        PriceBeforeRuleWasApplied = product.Attributes["Price"],
-                    };
-
-                    product = _actionExecutor.ExecuteAction(product, rule.Action);
-                    ar.PriceAfterRuleWasApplied = product.Attributes["Price"];
-
-                    product.RulesApplied.Add(ar);
-
-                    if (!rule.ContinueProcessing)
-                        break;
-                }
-            }
-
-            return product;
-        }
-    }
-
     public class ConditionsContainerChecker
     {
         private readonly ConditionChecker _conditionChecker;

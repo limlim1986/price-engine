@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PriceEngine.Core.Operators
+﻿namespace PriceEngine.Core.Operators
 {
     public class EqualsCheck : IOperatorCheck
     {

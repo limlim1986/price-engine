@@ -1,6 +1,6 @@
 ﻿using PriceEngine.Core;
+using PriceEngine.Core.Entities;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PriceEngine
@@ -9,7 +9,7 @@ namespace PriceEngine
     {
         private static Product[] products;
         private static Rule[] rules;
-        private static RuleExecuter _re;
+        private static RuleApplier _re;
 
         static void Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace PriceEngine
 
             products = productRepository.GetAll().ToArray();
             rules = ruleRepository.GetAll().ToArray();
-            _re = new RuleExecuter();
+            _re = new RuleApplier();
 
             RunRules();           
         }

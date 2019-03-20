@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PriceEngine.Core
+namespace PriceEngine.Core.Entities
 {
     public class Action
     {

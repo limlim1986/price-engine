@@ -1,6 +1,10 @@
-﻿using PriceEngine.Core.Operators;
+﻿using Newtonsoft.Json;
+using PriceEngine.Core;
+using PriceEngine.Core.Entities;
+using PriceEngine.Core.Operators;
 using System;
 using System.Collections.Generic;
+using Action = PriceEngine.Core.Entities.Action;
 
 namespace PriceEngine
 {
@@ -15,7 +19,7 @@ namespace PriceEngine
 
             for (int i = 1; i < 100; i++)
             {
-                var prio = random.Next(1, 100);
+                var prio = random.Next(20, 100);
 
                 var r = new Rule
                 {
@@ -38,25 +42,25 @@ namespace PriceEngine
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = OperatorConstant.GratherThan,
+                                Operator = OperatorConstant.GreaterThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = OperatorConstant.GratherThan,
+                                Operator = OperatorConstant.GreaterThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = OperatorConstant.GratherThan,
+                                Operator = OperatorConstant.GreaterThan,
                                 Value = 1M
                             },
                             new Condition
                             {
                                 ContextPropertyName = "Price",
-                                Operator = OperatorConstant.GratherThan,
+                                Operator = OperatorConstant.GreaterThan,
                                 Value = 1M
                             }                     
                         },
@@ -76,25 +80,25 @@ namespace PriceEngine
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = OperatorConstant.GratherThan,
+                                        Operator = OperatorConstant.GreaterThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = OperatorConstant.GratherThan,
+                                        Operator = OperatorConstant.GreaterThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = OperatorConstant.GratherThan,
+                                        Operator = OperatorConstant.GreaterThan,
                                         Value = 1M
                                     },
                                     new Condition
                                     {
                                         ContextPropertyName = "Price",
-                                        Operator = OperatorConstant.GratherThan,
+                                        Operator = OperatorConstant.GreaterThan,
                                         Value = 1M
                                     }
                                 }
@@ -104,7 +108,33 @@ namespace PriceEngine
                 };
 
                 _rules.Add(r);
-            }           
+            }
+
+            //var nr = new Rule
+            //{
+            //    Name = "color in red blue or black gives price of 1",
+            //    ContinueProcessing = false,
+            //    Priority = 1,
+            //    RuleId = 999,
+            //    ShopIds = new List<int> { 1 },
+            //    CustomerSegmentIds = new List<int> { 1 },
+            //    Action = new Action { Type = ActionType.SetFixedPrice, Value = 1 },
+            //    Condition = new ConditionsContainer
+            //    {
+            //        Type = ConditionContainerType.All,
+            //        Conditions = new List<Condition>
+            //        {
+            //            new Condition
+            //            {
+            //                ContextPropertyName = "Color",
+            //                Operator = OperatorConstant.In,
+            //                Value = "Red, Blue, Black"
+            //            }
+            //        }
+            //    }
+            //};
+
+            //_rules.Add(nr);
         }
 
         public List<Rule> GetAll()

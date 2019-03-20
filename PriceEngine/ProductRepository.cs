@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PriceEngine.Core;
+using PriceEngine.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,7 +14,7 @@ namespace PriceEngine
         {
             _products = new List<Product>();
             var random = new Random();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var p = new Product
                 {

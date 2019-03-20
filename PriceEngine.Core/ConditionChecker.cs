@@ -1,4 +1,5 @@
-﻿using PriceEngine.Core.Operators;
+﻿using PriceEngine.Core.Entities;
+using PriceEngine.Core.Operators;
 using System;
 using System.Collections.Generic;
 using System.Linq;

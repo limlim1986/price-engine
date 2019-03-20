@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PriceEngine.Core.Entities;
+using System.Collections.Generic;
 
 namespace PriceEngine.Core
 {

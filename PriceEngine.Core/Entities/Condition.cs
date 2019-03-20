@@ -1,7 +1,7 @@
 ﻿using PriceEngine.Core;
 using PriceEngine.Core.Operators;
 
-namespace PriceEngine.Core
+namespace PriceEngine.Core.Entities
 {
     public class Condition
     {

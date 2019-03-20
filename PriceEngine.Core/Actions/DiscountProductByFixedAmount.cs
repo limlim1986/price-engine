@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PriceEngine.Core;
+using PriceEngine.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

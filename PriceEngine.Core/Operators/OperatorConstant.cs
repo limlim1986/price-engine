@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace PriceEngine.Core.Operators
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum OperatorConstant
     {
         Equals,
-        GratherThan,
+        GreaterThan,
         LessThan,
         In,
         NotIn
