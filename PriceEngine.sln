@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PriceEngine", "PriceEngine\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceEngine.Core", "PriceEngine.Core\PriceEngine.Core.csproj", "{17784E4A-E062-47FA-A93D-3269CF6B5F04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceEngine.Core.Tests", "PriceEngine.Core.Tests\PriceEngine.Core.Tests.csproj", "{7138BD0A-A552-46D0-94D6-866C6B4C5CB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{17784E4A-E062-47FA-A93D-3269CF6B5F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17784E4A-E062-47FA-A93D-3269CF6B5F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17784E4A-E062-47FA-A93D-3269CF6B5F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7138BD0A-A552-46D0-94D6-866C6B4C5CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7138BD0A-A552-46D0-94D6-866C6B4C5CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7138BD0A-A552-46D0-94D6-866C6B4C5CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7138BD0A-A552-46D0-94D6-866C6B4C5CB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
