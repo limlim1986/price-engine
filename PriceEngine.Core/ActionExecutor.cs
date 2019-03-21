@@ -1,11 +1,12 @@
 ﻿using PriceEngine.Actions;
 using PriceEngine.Core.Entities;
+using PriceEngine.Core.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PriceEngine.Core
 {
-    public class ActionExecutor
+    public class ActionExecutor : IActionExecutor
     {
         private readonly List<IAction> _actionsList;
         public ActionExecutor()

@@ -1,11 +1,12 @@
 ﻿using PriceEngine.Core.Entities;
+using PriceEngine.Core.Interfaces;
 using System.Linq;
 
 namespace PriceEngine.Core
 {
-    public class RuleApplier
+    public class RuleApplier : IRuleApplier
     {
-        private RuleEvaluator _ruleEvaluator;
+        private IRuleEvaluator _ruleEvaluator;
 
         public RuleApplier()
         {

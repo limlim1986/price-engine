@@ -1,9 +1,10 @@
 ﻿using PriceEngine.Core.Entities;
+using PriceEngine.Core.Interfaces;
 using System.Linq;
 
 namespace PriceEngine.Core
 {
-    public class ConditionsContainerChecker
+    public class ConditionsContainerChecker : IConditionsContainerChecker
     {
         private readonly ConditionChecker _conditionChecker;
 

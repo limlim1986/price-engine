@@ -1,11 +1,12 @@
 ﻿using PriceEngine.Core.Entities;
+using PriceEngine.Core.Interfaces;
 
 namespace PriceEngine.Core
 {
-    public class RuleEvaluator
+    public class RuleEvaluator : IRuleEvaluator
     {
-        private ActionExecutor _actionExecutor;
-        private ConditionsContainerChecker _conditionsContainerChecker;
+        private IActionExecutor _actionExecutor;
+        private IConditionsContainerChecker _conditionsContainerChecker;
 
         public RuleEvaluator()
         {

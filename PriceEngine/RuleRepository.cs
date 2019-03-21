@@ -25,7 +25,7 @@ namespace PriceEngine
                 {
                     RuleId = i,
                     Name = "10% off for all products that cost 10",
-                    Action = new Action { Type = ActionType.DiscountPercentage, Value = 10},
+                    Action = new Action { Type = ActionType.DiscountFixedAmount, Value = 1},
                     ContinueProcessing = true,
                     Priority = prio,
                     Condition = new ConditionsContainer
