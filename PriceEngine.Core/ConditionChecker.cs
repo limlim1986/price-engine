@@ -11,17 +11,11 @@ namespace PriceEngine.Core
     {
         private List<IOperatorCheck> _operatorCheckers;
 
-        public ConditionChecker()
+        public ConditionChecker(List<IOperatorCheck> operatorCheckers)
         {
-            _operatorCheckers = new List<IOperatorCheck>
-            {
-                new EqualsCheck(),
-                new GreaterThanCheck(),
-                new LessThanCheck(),
-                new InCheck(),
-                new NotInCheck()
-            };
+            _operatorCheckers = operatorCheckers;
         }
+
         public bool Check(Condition condition, Product p)
         {
             var operatorChecker = _operatorCheckers.FirstOrDefault(oc => oc.HandlesOperator == condition.Operator);

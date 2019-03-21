@@ -8,10 +8,10 @@ namespace PriceEngine.Core
         private IActionExecutor _actionExecutor;
         private IConditionsContainerChecker _conditionsContainerChecker;
 
-        public RuleEvaluator()
+        public RuleEvaluator(IActionExecutor actionExecutor, IConditionsContainerChecker conditionsContainerChecker)
         {
-            _actionExecutor = new ActionExecutor();
-            _conditionsContainerChecker = new ConditionsContainerChecker();
+            _actionExecutor = actionExecutor;
+            _conditionsContainerChecker = conditionsContainerChecker;
         }
         public Product ApplyRules(Rule[] rules, Product product)
         {

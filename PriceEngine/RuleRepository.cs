@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using PriceEngine.Core;
+﻿using PriceEngine.Core;
 using PriceEngine.Core.Entities;
 using PriceEngine.Core.Operators;
 using System;
@@ -17,7 +16,7 @@ namespace PriceEngine
             _rules = new List<Rule>();
             var random = new Random();
 
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < 25; i++)
             {
                 var prio = random.Next(20, 100);
 
@@ -108,33 +107,7 @@ namespace PriceEngine
                 };
 
                 _rules.Add(r);
-            }
-
-            //var nr = new Rule
-            //{
-            //    Name = "color in red blue or black gives price of 1",
-            //    ContinueProcessing = false,
-            //    Priority = 1,
-            //    RuleId = 999,
-            //    ShopIds = new List<int> { 1 },
-            //    CustomerSegmentIds = new List<int> { 1 },
-            //    Action = new Action { Type = ActionType.SetFixedPrice, Value = 1 },
-            //    Condition = new ConditionsContainer
-            //    {
-            //        Type = ConditionContainerType.All,
-            //        Conditions = new List<Condition>
-            //        {
-            //            new Condition
-            //            {
-            //                ContextPropertyName = "Color",
-            //                Operator = OperatorConstant.In,
-            //                Value = "Red, Blue, Black"
-            //            }
-            //        }
-            //    }
-            //};
-
-            //_rules.Add(nr);
+            }           
         }
 
         public List<Rule> GetAll()

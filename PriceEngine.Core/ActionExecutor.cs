@@ -9,14 +9,9 @@ namespace PriceEngine.Core
     public class ActionExecutor : IActionExecutor
     {
         private readonly List<IAction> _actionsList;
-        public ActionExecutor()
+        public ActionExecutor(List<IAction> actionsList)
         {
-            _actionsList = new List<IAction>
-            {
-                new DiscountProductByPercentage(),
-                new DiscountProductByFixedAmount(),
-                new SetProductFixedPrice()
-            };
+            _actionsList = actionsList;
         }
 
         public Product ExecuteAction(Product product, Action action)

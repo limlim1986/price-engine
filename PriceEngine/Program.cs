@@ -1,6 +1,9 @@
-﻿using PriceEngine.Core;
+﻿using PriceEngine.Actions;
+using PriceEngine.Core;
 using PriceEngine.Core.Entities;
+using PriceEngine.Core.Operators;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PriceEngine
@@ -22,7 +25,18 @@ namespace PriceEngine
 
             products = productRepository.GetAll().ToArray();
             rules = ruleRepository.GetAll().ToArray();
-            _re = new RuleApplier();
+            _re = new RuleApplier ( 
+                new RuleEvaluator (
+                    new ActionExecutor (
+                        new List<IAction> { new DiscountProductByFixedAmount(), new DiscountProductByPercentage(), new SetProductFixedPrice() }
+                        ),
+                    new ConditionsContainerChecker (
+                        new ConditionChecker (
+                            new List<IOperatorCheck> { new EqualsCheck(), new GreaterThanCheck(), new InCheck(), new LessThanCheck(), new NotInCheck() }
+                        )
+                    )
+                )
+            );
 
             RunRules();           
         }

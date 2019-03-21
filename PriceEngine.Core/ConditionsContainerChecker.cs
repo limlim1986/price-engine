@@ -6,11 +6,11 @@ namespace PriceEngine.Core
 {
     public class ConditionsContainerChecker : IConditionsContainerChecker
     {
-        private readonly ConditionChecker _conditionChecker;
+        private readonly IConditionChecker _conditionChecker;
 
-        public ConditionsContainerChecker()
+        public ConditionsContainerChecker(IConditionChecker conditionChecker)
         {
-            _conditionChecker = new ConditionChecker();
+            _conditionChecker = conditionChecker;
         }
 
         public bool Check(Rule rule, Product product)

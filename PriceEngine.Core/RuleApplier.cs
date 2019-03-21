@@ -8,9 +8,9 @@ namespace PriceEngine.Core
     {
         private IRuleEvaluator _ruleEvaluator;
 
-        public RuleApplier()
+        public RuleApplier(IRuleEvaluator ruleEvaluator)
         {
-            _ruleEvaluator = new RuleEvaluator();
+            _ruleEvaluator = ruleEvaluator;
         }
         public Product[] ApplyRules(Rule[] rules, Product[] products)
         {       
