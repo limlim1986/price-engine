@@ -31,7 +31,7 @@ namespace PriceEngine.Core
                     product = _actionExecutor.ExecuteAction(product, rule.Action);
                     ar.PriceAfterRuleWasApplied = product.Attributes["Price"];
 
-                    product.RulesApplied.Add(ar);
+                    product = product.ApplyRule(ar);
 
                     if (!rule.ContinueProcessing)
                         break;

@@ -7,8 +7,7 @@ namespace PriceEngine.Actions
     {
         public Product Execute(Product product, int value)
         {
-            product.Attributes["Price"] = (decimal)value;
-            return product;
+            return product.SetPrice((decimal)value);
         }
     }
 }

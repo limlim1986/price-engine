@@ -16,7 +16,7 @@ namespace PriceEngine
             _rules = new List<Rule>();
             var random = new Random();
 
-            for (int i = 1; i < 25; i++)
+            for (int i = 1; i < 100; i++)
             {
                 var prio = random.Next(20, 100);
 
