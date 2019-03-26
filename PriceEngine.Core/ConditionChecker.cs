@@ -1,7 +1,6 @@
 ﻿using PriceEngine.Core.Entities;
 using PriceEngine.Core.Interfaces;
 using PriceEngine.Core.Operators;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +8,9 @@ namespace PriceEngine.Core
 {
     public class ConditionChecker : IConditionChecker
     {
-        private List<IOperatorCheck> _operatorCheckers;
+        private IEnumerable<IOperatorCheck> _operatorCheckers;
 
-        public ConditionChecker(List<IOperatorCheck> operatorCheckers)
+        public ConditionChecker(IEnumerable<IOperatorCheck> operatorCheckers)
         {
             _operatorCheckers = operatorCheckers;
         }

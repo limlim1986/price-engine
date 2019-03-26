@@ -1,9 +1,10 @@
-﻿using PriceEngine.Actions;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PriceEngine.Core;
+using PriceEngine.Core.Actions;
 using PriceEngine.Core.Entities;
+using PriceEngine.Core.Interfaces;
 using PriceEngine.Core.Operators;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PriceEngine
@@ -12,10 +13,28 @@ namespace PriceEngine
     {
         private static Product[] products;
         private static Rule[] rules;
-        private static RuleApplier _re;
+        private static IRuleApplier _re;
 
         static void Main(string[] args)
         {
+
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton<IActionStrategy, ActionStrategy>()
+                .AddSingleton<IRuleApplier, RuleApplier>()
+                .AddSingleton<IRuleEvaluator, RuleEvaluator>()
+                .AddSingleton<IActionExecutor, ActionExecutor>()
+                .AddSingleton<IConditionsContainerChecker, ConditionsContainerChecker>()
+                .AddSingleton<IConditionChecker, ConditionChecker>()
+                .AddSingleton<IActionFactory, ActionDiscountProductByFixedAmountFactory>()
+                .AddSingleton<IActionFactory, ActionDiscountProductByPercentageFactory>()
+                .AddSingleton<IActionFactory, ActionSetProductFixedPriceFactory>()
+                .AddSingleton<IOperatorCheck, EqualsCheck>()
+                .AddSingleton<IOperatorCheck, GreaterThanCheck>()
+                .AddSingleton<IOperatorCheck, LessThanCheck>()
+                .AddSingleton<IOperatorCheck, InCheck>()
+                .AddSingleton<IOperatorCheck, NotInCheck>()
+                .BuildServiceProvider();
+
             var productRepository = new ProductRepository();
             var ruleRepository = new RuleRepository();
             var context = new Context
@@ -25,18 +44,7 @@ namespace PriceEngine
 
             products = productRepository.GetAll().ToArray();
             rules = ruleRepository.GetAll().ToArray();
-            _re = new RuleApplier ( 
-                new RuleEvaluator (
-                    new ActionExecutor (
-                        new List<IAction> { new DiscountProductByFixedAmount(), new DiscountProductByPercentage(), new SetProductFixedPrice() }
-                        ),
-                    new ConditionsContainerChecker (
-                        new ConditionChecker (
-                            new List<IOperatorCheck> { new EqualsCheck(), new GreaterThanCheck(), new InCheck(), new LessThanCheck(), new NotInCheck() }
-                        )
-                    )
-                )
-            );
+            _re = serviceProvider.GetService<IRuleApplier>();
 
             RunRules();           
         }

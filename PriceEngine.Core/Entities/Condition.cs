@@ -1,5 +1,4 @@
-﻿using PriceEngine.Core;
-using PriceEngine.Core.Operators;
+﻿using PriceEngine.Core.Operators;
 
 namespace PriceEngine.Core.Entities
 {

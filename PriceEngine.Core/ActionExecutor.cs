@@ -1,23 +1,21 @@
-﻿using PriceEngine.Actions;
-using PriceEngine.Core.Entities;
+﻿using PriceEngine.Core.Entities;
 using PriceEngine.Core.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PriceEngine.Core
 {
     public class ActionExecutor : IActionExecutor
     {
-        private readonly List<IAction> _actionsList;
-        public ActionExecutor(List<IAction> actionsList)
+        private readonly IActionStrategy actionStrategy;
+
+        public ActionExecutor(IActionStrategy actionStrategy)
         {
-            _actionsList = actionsList;
+            this.actionStrategy = actionStrategy;
         }
 
         public Product ExecuteAction(Product product, Action action)
         {
-            var executor = _actionsList.SingleOrDefault(a => a.Type == action.Type);
-            product = executor.Execute(product, action.Value);
+            var a = actionStrategy.CreateAction(action.Type);
+            product = a.Execute(product, action.Value);
       
             return product;
         }
