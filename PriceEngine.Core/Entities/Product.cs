@@ -20,29 +20,28 @@ namespace PriceEngine.Core.Entities
             Attributes["Price"] = price;
         }
 
-        public void ApplyRule(AppliedRule appliedRule)
+        public void ApplyRules(Rule[] rules)
         {
-            RulesApplied.Add(appliedRule);
-        }
+            for (int i = 0; i < rules.Length; i++)
+            {
+                var rule = rules[i];
+                if (rule.AppliesTo(this))
+                {
+                    var ar = new AppliedRule
+                    {
+                        Rule = rule,
+                        PriceBeforeRuleWasApplied = Attributes["Price"],
+                    };
 
-        public void Visit(IProductVisitor visitor)
-        {
-            visitor.Execute(this);
-        }
-    }
+                    rule.ExecuteAction(this);
+                    ar.PriceAfterRuleWasApplied = Attributes["Price"];
 
-    public class ConcreteVisitor : IProductVisitor
-    {
-        private readonly AppliedRule _appliedRule;
+                    RulesApplied.Add(ar);
 
-        public ConcreteVisitor(AppliedRule appliedRule)
-        {
-            _appliedRule = appliedRule;
-        }
-
-        public void Execute(Product product)
-        {
-            product.ApplyRule(_appliedRule);
+                    if (!rule.ContinueProcessing)
+                        break;
+                }
+            }
         }
     }
 }

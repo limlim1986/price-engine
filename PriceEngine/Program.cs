@@ -21,7 +21,6 @@ namespace PriceEngine
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<IActionStrategy, ActionStrategy>()
                 .AddSingleton<IRuleApplier, RuleApplier>()
-                .AddSingleton<IRuleEvaluator, RuleEvaluator>()
                 .AddSingleton<IActionExecutor, ActionExecutor>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByFixedAmountFactory>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByPercentageFactory>()

@@ -1,4 +1,5 @@
-﻿using PriceEngine.Core;
+﻿using PriceEngine.Actions;
+using PriceEngine.Core;
 using PriceEngine.Core.Entities;
 using PriceEngine.Core.Operators;
 using System.Collections.Generic;
@@ -25,14 +26,13 @@ namespace PriceEngine
 
         private Rule GetConditionsOnlyRule(int id, int prio)
         {          
-            return new Rule
+            return new Rule(new ConditionsContainer(ConditionContainerType.All, GetConditions()), new DiscountProductByFixedAmount())
             {
                 RuleId = id,
                 Name = "10% off for all products that cost 10",
                 Action = new Action { Type = ActionType.DiscountFixedAmount, Value = 1 },
                 ContinueProcessing = true,
-                Priority = prio,
-                Condition = new ConditionsContainer(ConditionContainerType.All, GetConditions())
+                Priority = prio
             };
         }
 
@@ -44,14 +44,13 @@ namespace PriceEngine
                 new ConditionsContainer(ConditionContainerType.Any, GetConditions())
             };
 
-            return new Rule
+            return new Rule(new ConditionsContainer(ConditionContainerType.All, conditionContainers), new DiscountProductByFixedAmount())
             {
                 RuleId = id,
                 Name = "10% off for all products that cost 10",
                 Action = new Action { Type = ActionType.DiscountFixedAmount, Value = 1 },
                 ContinueProcessing = true,
-                Priority = prio,
-                Condition = new ConditionsContainer(ConditionContainerType.All, conditionContainers)
+                Priority = prio
             };
         }
 
