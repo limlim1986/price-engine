@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PriceEngine.Core.Interfaces;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace PriceEngine.Core.Entities
@@ -22,6 +23,26 @@ namespace PriceEngine.Core.Entities
         public Product ApplyRule(AppliedRule appliedRule)
         {
             return new Product(Attributes, RulesApplied.Add(appliedRule));
+        }
+
+        public void Visit(IProductVisitor visitor)
+        {
+            visitor.Execute(this);
+        }
+    }
+
+    public class ConcreteVisitor : IProductVisitor
+    {
+        private readonly AppliedRule _appliedRule;
+
+        public ConcreteVisitor(AppliedRule appliedRule)
+        {
+            _appliedRule = appliedRule;
+        }
+
+        public void Execute(Product product)
+        {
+            product.ApplyRule(_appliedRule);
         }
     }
 }

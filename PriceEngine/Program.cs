@@ -23,8 +23,6 @@ namespace PriceEngine
                 .AddSingleton<IRuleApplier, RuleApplier>()
                 .AddSingleton<IRuleEvaluator, RuleEvaluator>()
                 .AddSingleton<IActionExecutor, ActionExecutor>()
-                .AddSingleton<IConditionsContainerChecker, ConditionsContainerChecker>()
-                .AddSingleton<IConditionChecker, ConditionChecker>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByFixedAmountFactory>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByPercentageFactory>()
                 .AddSingleton<IActionFactory, ActionSetProductFixedPriceFactory>()
@@ -33,10 +31,12 @@ namespace PriceEngine
                 .AddSingleton<IOperatorCheck, LessThanCheck>()
                 .AddSingleton<IOperatorCheck, InCheck>()
                 .AddSingleton<IOperatorCheck, NotInCheck>()
+                .AddSingleton<IRuleRepository, RuleRepository>()
+                .AddSingleton<IRuleGenerator, RuleGenerator>()
                 .BuildServiceProvider();
 
             var productRepository = new ProductRepository();
-            var ruleRepository = new RuleRepository();
+            var ruleRepository = serviceProvider.GetService<IRuleRepository>();
             var context = new Context
             {
                 Customer = new Customer { Age = 100, Name = "Liam" }

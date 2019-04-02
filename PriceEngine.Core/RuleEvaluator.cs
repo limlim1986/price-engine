@@ -6,19 +6,17 @@ namespace PriceEngine.Core
     public class RuleEvaluator : IRuleEvaluator
     {
         private IActionExecutor _actionExecutor;
-        private IConditionsContainerChecker _conditionsContainerChecker;
 
-        public RuleEvaluator(IActionExecutor actionExecutor, IConditionsContainerChecker conditionsContainerChecker)
+        public RuleEvaluator(IActionExecutor actionExecutor)
         {
             _actionExecutor = actionExecutor;
-            _conditionsContainerChecker = conditionsContainerChecker;
         }
         public Product ApplyRules(Rule[] rules, Product product)
         {
             for (int i = 0; i < rules.Length; i++)
             {
                 Rule rule = rules[i];
-                var ruleApplies = _conditionsContainerChecker.Check(rule, product);
+                var ruleApplies = rule.Condition.Check(product);
 
                 if (ruleApplies)
                 {
