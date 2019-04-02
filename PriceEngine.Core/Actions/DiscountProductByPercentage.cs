@@ -5,9 +5,9 @@ namespace PriceEngine.Actions
 {
     public class DiscountProductByPercentage : IAction
     {
-        public Product Execute(Product product, int value)
+        public void Execute(Product product, int value)
         {
-            return product.SetPrice(decimal.Multiply(product.Attributes["Price"], 1M - (0.01M * value)));
+            product.SetPrice(decimal.Multiply(product.Attributes["Price"], 1M - (0.01M * value)));
         }
     }
 }

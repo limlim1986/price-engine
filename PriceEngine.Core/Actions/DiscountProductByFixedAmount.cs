@@ -5,9 +5,9 @@ namespace PriceEngine.Actions
 {
     public class DiscountProductByFixedAmount : IAction
     {
-        public Product Execute(Product product, int value)
+        public void Execute(Product product, int value)
         {
-            return product.SetPrice(product.Attributes["Price"] - (decimal)value);
+            product.SetPrice(product.Attributes["Price"] - (decimal)value);
         }
     }
 }

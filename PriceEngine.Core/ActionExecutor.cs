@@ -12,12 +12,10 @@ namespace PriceEngine.Core
             this.actionStrategy = actionStrategy;
         }
 
-        public Product ExecuteAction(Product product, Action action)
+        public void ExecuteAction(Product product, Action action)
         {
             var a = actionStrategy.CreateAction(action.Type);
-            product = a.Execute(product, action.Value);
-      
-            return product;
+            a.Execute(product, action.Value);    
         }
     }
 }

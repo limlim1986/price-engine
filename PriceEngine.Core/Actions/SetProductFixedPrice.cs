@@ -5,9 +5,9 @@ namespace PriceEngine.Actions
 {
     public class SetProductFixedPrice : IAction
     {
-        public Product Execute(Product product, int value)
+        public void Execute(Product product, int value)
         {
-            return product.SetPrice((decimal)value);
+            product.SetPrice((decimal)value);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace PriceEngine.Core.Interfaces
 {
     public interface IActionExecutor
     {
-        Product ExecuteAction(Product product, Action action);
+        void ExecuteAction(Product product, Action action);
     }
 }

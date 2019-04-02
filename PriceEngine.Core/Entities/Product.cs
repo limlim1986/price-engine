@@ -6,23 +6,23 @@ namespace PriceEngine.Core.Entities
 {
     public class Product
     {
-        public Product(IDictionary<string, dynamic> attributes, IEnumerable<AppliedRule> appliedRules)
+        public Product(Dictionary<string, dynamic> attributes, List<AppliedRule> appliedRules)
         {
-            Attributes = attributes.ToImmutableDictionary();
-            RulesApplied = appliedRules.ToImmutableList();
+            Attributes = attributes;
+            RulesApplied = appliedRules;
         }
         
-        public ImmutableDictionary<string, dynamic> Attributes { get; private set; }
-        public ImmutableList<AppliedRule> RulesApplied { get; private set; }
+        public Dictionary<string, dynamic> Attributes { get; private set; }
+        public IList<AppliedRule> RulesApplied { get; private set; }
 
-        public Product SetPrice(decimal price)
+        public void SetPrice(decimal price)
         {
-            return new Product(Attributes.SetItem("Price", price), RulesApplied);
+            Attributes["Price"] = price;
         }
 
-        public Product ApplyRule(AppliedRule appliedRule)
+        public void ApplyRule(AppliedRule appliedRule)
         {
-            return new Product(Attributes, RulesApplied.Add(appliedRule));
+            RulesApplied.Add(appliedRule);
         }
 
         public void Visit(IProductVisitor visitor)

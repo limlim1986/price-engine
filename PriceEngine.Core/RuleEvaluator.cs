@@ -26,10 +26,10 @@ namespace PriceEngine.Core
                         PriceBeforeRuleWasApplied = product.Attributes["Price"],
                     };
 
-                    product = _actionExecutor.ExecuteAction(product, rule.Action);
+                    _actionExecutor.ExecuteAction(product, rule.Action);
                     ar.PriceAfterRuleWasApplied = product.Attributes["Price"];
 
-                    product = product.ApplyRule(ar);
+                    product.ApplyRule(ar);
 
                     if (!rule.ContinueProcessing)
                         break;
