@@ -7,7 +7,7 @@ namespace PriceEngine.Actions
     {
         public void Execute(Product product, int value)
         {
-            product.SetPrice(product.Attributes["Price"] - (decimal)value);
+            product.SetPrice(product.GetPrice() - (decimal)value);
         }
     }
 }

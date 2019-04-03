@@ -12,24 +12,22 @@ namespace PriceEngine
         {
             _products = new List<Product>();
             var random = new Random();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 var p = new Product(new Dictionary<string, dynamic> {
                         { "ProductId", i },
                         { "Name", "iPhone 7" },
-                        { "Price", random.Next(100, 15000) },
                         { "Color", "Red" },
                         { "Memory", 32 },
                         { "HasEsim", true }
-                    }, 
-                    new List<AppliedRule>());
+                    }, random.Next(100, 15000));
 
                 _products.Add(p);
             }    
         }
-        public List<Product> GetAll()
+        public ProductCollection GetAll()
         {
-            return _products;
+            return new ProductCollection(_products);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace PriceEngine.Actions
     {
         public void Execute(Product product, int value)
         {
-            product.SetPrice(decimal.Multiply(product.Attributes["Price"], 1M - (0.01M * value)));
+            product.SetPrice(decimal.Multiply(product.GetPrice(), 1M - (0.01M * value)));
         }
     }
 }

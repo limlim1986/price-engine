@@ -26,8 +26,9 @@ namespace PriceEngine.Core.Entities
         public string ContextPropertyName { get; private set; }
 
         public bool Check(Product p)
-        {         
-            return OperatorChecker.Check(p.Attributes[ContextPropertyName], Value);
+        {
+            var attributeValue = ContextPropertyName.Equals("Price") ? p.GetPrice() : p.Attributes[ContextPropertyName];
+            return OperatorChecker.Check(attributeValue, Value);
         }
     }
 }

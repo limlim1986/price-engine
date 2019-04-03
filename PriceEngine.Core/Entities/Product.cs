@@ -1,42 +1,50 @@
-﻿using PriceEngine.Core.Interfaces;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace PriceEngine.Core.Entities
 {
     public class Product
     {
-        public Product(Dictionary<string, dynamic> attributes, List<AppliedRule> appliedRules)
+        private IList<AppliedRule> appliedRules = new List<AppliedRule>();
+        private decimal price;
+
+        public Product(Dictionary<string, dynamic> attributes, decimal price)
         {
             Attributes = attributes;
-            RulesApplied = appliedRules;
+            this.price = price;
         }
-        
+
+        public decimal GetPrice()
+        {
+            return price;
+        }
+
         public Dictionary<string, dynamic> Attributes { get; private set; }
-        public IList<AppliedRule> RulesApplied { get; private set; }
 
-        public void SetPrice(decimal price)
+        public void SetPrice(decimal newPrice)
         {
-            Attributes["Price"] = price;
+            if (newPrice < 0)
+                throw new ArgumentException($"{nameof(newPrice)} must not be negative");
+
+            price = newPrice;
         }
 
-        public void ApplyRules(Rule[] rules)
+        public void ApplyRules(List<Rule> rules)
         {
-            for (int i = 0; i < rules.Length; i++)
+            foreach (var rule in rules)
             {
-                var rule = rules[i];
                 if (rule.AppliesTo(this))
                 {
                     var ar = new AppliedRule
                     {
                         Rule = rule,
-                        PriceBeforeRuleWasApplied = Attributes["Price"],
+                        PriceBeforeRuleWasApplied = price,
                     };
 
                     rule.ExecuteAction(this);
-                    ar.PriceAfterRuleWasApplied = Attributes["Price"];
+                    ar.PriceAfterRuleWasApplied = price;
 
-                    RulesApplied.Add(ar);
+                    appliedRules.Add(ar);
 
                     if (!rule.ContinueProcessing)
                         break;

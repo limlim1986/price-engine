@@ -5,22 +5,21 @@ using PriceEngine.Core.Entities;
 using PriceEngine.Core.Interfaces;
 using PriceEngine.Core.Operators;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PriceEngine
 {
     class Program
     {
-        private static Product[] products;
-        private static Rule[] rules;
-        private static IRuleApplier _re;
+        private static ProductCollection productCollection;
+        private static List<Rule> rules;
 
         static void Main(string[] args)
         {
 
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<IActionStrategy, ActionStrategy>()
-                .AddSingleton<IRuleApplier, RuleApplier>()
                 .AddSingleton<IActionExecutor, ActionExecutor>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByFixedAmountFactory>()
                 .AddSingleton<IActionFactory, ActionDiscountProductByPercentageFactory>()
@@ -41,9 +40,8 @@ namespace PriceEngine
                 Customer = new Customer { Age = 100, Name = "Liam" }
             };
 
-            products = productRepository.GetAll().ToArray();
-            rules = ruleRepository.GetAll().ToArray();
-            _re = serviceProvider.GetService<IRuleApplier>();
+            productCollection = productRepository.GetAll();
+            rules = ruleRepository.GetAll();
 
             RunRules();           
         }
@@ -51,7 +49,7 @@ namespace PriceEngine
         private static void RunRules()
         {
             var sw = Stopwatch.StartNew();                    
-            var pwar = _re.ApplyRules(rules, products);
+            var pwar = productCollection.ApplyRules(rules);
             sw.Stop();
 
             Console.WriteLine($"Executed in {sw.ElapsedMilliseconds}ms");
