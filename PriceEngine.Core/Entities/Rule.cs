@@ -26,7 +26,7 @@ namespace PriceEngine.Core
 
         public bool AppliesTo(Product product)
         {
-            return condition.Check(product);
+            return condition.ConditionsApplyTo(product);
         }
 
         public void ExecuteAction(Product product)

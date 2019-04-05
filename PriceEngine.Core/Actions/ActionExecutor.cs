@@ -1,7 +1,7 @@
 ﻿using PriceEngine.Core.Entities;
 using PriceEngine.Core.Interfaces;
 
-namespace PriceEngine.Core
+namespace PriceEngine.Core.Actions
 {
     public class ActionExecutor : IActionExecutor
     {

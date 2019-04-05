@@ -2,7 +2,7 @@
 using PriceEngine.Core.Entities;
 using PriceEngine.Core.Interfaces;
 
-namespace PriceEngine.Core.Actions
+namespace PriceEngine.Core.Actions.Factories
 {
     public class ActionDiscountProductByFixedAmountFactory : IActionFactory
     {

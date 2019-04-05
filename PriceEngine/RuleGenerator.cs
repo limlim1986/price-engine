@@ -18,8 +18,8 @@ namespace PriceEngine
 
         public Rule GetRandomRule(int id, int prio)
         {
-            if (id % 2 == 0)
-                return GetConditionsOnlyRule(id, prio);
+            //if (id % 2 == 0)
+            //    return GetConditionsOnlyRule(id, prio);
 
             return GetRuleWithConditionContainers(id, prio);
         }
@@ -38,10 +38,16 @@ namespace PriceEngine
 
         private Rule GetRuleWithConditionContainers(int id, int prio)
         {       
-            var conditionContainers = new List<ConditionsContainer>
+            var conditionContainersInternal = new List<ConditionsContainer>
             {
                 new ConditionsContainer(ConditionContainerType.All, GetConditions()),
                 new ConditionsContainer(ConditionContainerType.Any, GetConditions())
+            };
+
+            var conditionContainers = new List<ConditionsContainer>
+            {
+                new ConditionsContainer(ConditionContainerType.All, GetConditions()),
+                new ConditionsContainer(ConditionContainerType.Any, conditionContainersInternal)
             };
 
             return new Rule(new ConditionsContainer(ConditionContainerType.All, conditionContainers), new DiscountProductByFixedAmount())
@@ -61,6 +67,16 @@ namespace PriceEngine
             return new List<Condition>
             {
                 new Condition(equalsOperatorChecker, "Red", "Color"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
+                new Condition(greaterThanOperatorChecker, 1M, "Price"),
                 new Condition(greaterThanOperatorChecker, 1M, "Price"),
                 new Condition(greaterThanOperatorChecker, 1M, "Price"),
                 new Condition(greaterThanOperatorChecker, 1M, "Price"),
