@@ -16,6 +16,7 @@ namespace PriceEngine.Core.Tests.Operators
         [TestMethod]
         public void When_integers_differ_equaloperator_should_return_false()
         {
+            
             var result = new EqualsCheck().Check(1, 2);
             Assert.IsFalse(result);
         }
